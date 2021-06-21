@@ -1,4 +1,4 @@
-export default class Product {
+export default class {
     #photo;
     #title;
     #description;
@@ -7,7 +7,8 @@ export default class Product {
     #shipping;
     #totalPrice;
     #reviews;
-    constructor(photo, title, description, storage, memory, shipping, totalPrice, reviews) {
+    #categories;
+    constructor(photo, title, description, storage, memory, shipping, totalPrice, reviews, categories = []) {
         this.photo = photo;
         this.title = title;
         this.description = description;
@@ -16,6 +17,7 @@ export default class Product {
         this.shipping = shipping;
         this.totalPrice = totalPrice;
         this.reviews = reviews;
+        this.categories = categories;
     }
     get photo() {
         return this.#photo;
@@ -40,6 +42,9 @@ export default class Product {
     }
     get reviews() {
         return this.#reviews;
+    }
+    get categories() {
+        return this.#categories;
     }
 
     set photo(v) {
@@ -74,11 +79,14 @@ export default class Product {
         if (typeof v == String)
             this.#reviews = v;
     }
+    set categories(v) {
+        if (typeof v == Array)
+            this.#categories = v;
+    }
 }
 export class Review {
-    constructor(name, content, positive) {
-        this.name = name;
+    constructor(author, content) {
+        this.name = author;
         this.content = content;
-        this.positive = positive;
     }
 }

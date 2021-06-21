@@ -1,13 +1,8 @@
 import React from "react";
-import { View, FlatList, TouchableOpacity, StyleSheet } from "react-native";
+import { View, FlatList, TouchableOpacity, StyleSheet, Platform } from "react-native";
 import WhiteText from "../components/WhiteText";
-const categories = [
-    { name: "First Person", key: 1 },
-    { name: "Puzzle", key: 2 },
-    { name: "Action", key: 3 },
-    { name: "Adventure", key: 4 },
-
-]
+import Colours from "../constants/Colours";
+import categories from "../data/categories";
 export default function Landing(p) {
     return (
         <View style={styles.container}>
@@ -16,17 +11,28 @@ export default function Landing(p) {
                 numColumns={2}
                 data={categories}
                 renderItem={({ item }) =>
-                    <TouchableOpacity style={styles.category}>
+                    <TouchableOpacity style={styles.category}
+                        onPress={() => p.navigation.navigate({
+                            routeName: 'category',
+                            params: { name: item.name }
+                        })}>
                         <WhiteText style={styles.categoryTxt}>{item.name}</WhiteText>
                     </TouchableOpacity>}
                 keyExtractor={item => item.key} />
         </View>
     )
 }
+Landing.navigationOptions = {
+    headerTitle: "Home",
+    headerStyle: {
+        backgroundColor: Platform.OS === 'android' ?  Colours.background: '',
+    },
+    headerTintColor: Platform.OS === 'android' ? "white" : ''
+}
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'DarkSlateGray',
+        backgroundColor: Colours.background,
         justifyContent: 'center',
         alignItems: 'center',
     },
