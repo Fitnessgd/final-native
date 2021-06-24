@@ -58,5 +58,6 @@ export default [
             Categories.action,
             Categories.adventure
         ]
-    )
+    ),
+    
 ]

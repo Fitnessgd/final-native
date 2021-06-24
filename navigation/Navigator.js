@@ -7,6 +7,9 @@ const Navigator = createStackNavigator({
     category: {
         screen: Category,
         path: "category/:name"
+    },
+    product:{
+        path:"product"
     }
 })
 export default createAppContainer(Navigator);

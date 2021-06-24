@@ -12,10 +12,12 @@ export default function Landing(p) {
                 data={categories}
                 renderItem={({ item }) =>
                     <TouchableOpacity style={styles.category}
-                        onPress={() => p.navigation.navigate({
-                            routeName: 'category',
-                            params: { name: item.name }
-                        })}>
+                        onPress={() =>
+                            p.navigation.navigate(
+                                'category',
+                                { name: item.name }
+                            )
+                        }>
                         <WhiteText style={styles.categoryTxt}>{item.name}</WhiteText>
                     </TouchableOpacity>}
                 keyExtractor={item => item.key} />
@@ -25,7 +27,7 @@ export default function Landing(p) {
 Landing.navigationOptions = {
     headerTitle: "Home",
     headerStyle: {
-        backgroundColor: Platform.OS === 'android' ?  Colours.background: '',
+        backgroundColor: Platform.OS === 'android' ? Colours.background : '',
     },
     headerTintColor: Platform.OS === 'android' ? "white" : ''
 }

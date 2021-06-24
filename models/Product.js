@@ -1,13 +1,13 @@
 export default class {
-    #photo;
-    #title;
-    #description;
-    #storage;
-    #memory;
-    #shipping;
-    #totalPrice;
-    #reviews;
-    #categories;
+    photo;
+    title;
+    description;
+    storage;
+    memory;
+    shipping;
+    totalPrice;
+    reviews;
+    categories;
     constructor(photo, title, description, storage, memory, shipping, totalPrice, reviews, categories = []) {
         this.photo = photo;
         this.title = title;
@@ -19,7 +19,7 @@ export default class {
         this.reviews = reviews;
         this.categories = categories;
     }
-    get photo() {
+    /*get photo() {
         return this.#photo;
     }
     get title() {
@@ -82,7 +82,7 @@ export default class {
     set categories(v) {
         if (typeof v == Array)
             this.#categories = v;
-    }
+    }*/
 }
 export class Review {
     constructor(author, content) {
