@@ -20,7 +20,7 @@ export default [
         Editing Tools: Portal 2 editing tools will be included.`,
         "8 GB",
         "2 GB",
-        "None",
+        0,
         36.95,
         [
             new Review(
@@ -59,5 +59,32 @@ export default [
             Categories.adventure
         ]
     ),
+    new Product(
+        "http://assets.vg247.com/current//2016/01/team_fortress_2.jpg",
+        "Team Fortress 2",
+        `The most highly-rated free game of all time!
+        One of the most popular online action games of all time, Team Fortress 2 delivers constant free updates—new game modes, maps, equipment and, most importantly, hats. Nine distinct classes provide a broad range of tactical abilities and personalities, and lend themselves to a variety of player skills.
+        
+        New to TF? Don’t sweat it!
+        No matter what your style and experience, we’ve got a character for you. Detailed training and offline practice modes will help you hone your skills before jumping into one of TF2’s many game modes, including Capture the Flag, Control Point, Payload, Arena, King of the Hill and more.
+        
+        Make a character your own!
+        There are hundreds of weapons, hats and more to collect, craft, buy and trade. Tweak your favorite class to suit your gameplay style and personal taste. You don’t need to pay to win—virtually all of the items in the Mann Co. Store can also be found in-game.`,
+        "15 GB",
+        "512 MB",
+        0,
+        0,
+        [
+            new Review(
+                "PC Gamer",
+                "The most fun you can have online"
+            )
+        ],
+        [
+            Categories.action,
+            Categories.adventure,
+            Categories.firstPerson
+        ]
+    )
     
 ]

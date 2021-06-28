@@ -14,10 +14,11 @@ export default function Category(p) {
         headerTintColor: Platform.OS === 'android' ? "white" : ''
     }
     const categoryProducts = products.filter(p => p.categories.includes(category))
+    console.log(categoryProducts);
     return (
         <View style={styles.container}>
             <FlatList
-                keyExtractor={(i, key) => key}
+                keyExtractor={(i, key) => key+""}
                 style={{ width: "100%" }}
                 data={categoryProducts}
                 renderItem={({ item }) =>
@@ -26,10 +27,10 @@ export default function Category(p) {
                             "product",
                             { product: item }
                         )}>
-                        <ImageBackground source={{ uri: item.photo }} style={{ width: "100%", height: "100%" }} >
+                        <ImageBackground source={{ uri: item.photo }} style={{ width: "100%", height: 70 }} >
                             <View style={styles.productTxt}>
                                 <WhiteText style={styles.productTxt}>{item.title}</WhiteText>
-                                <WhiteText style={styles.productTxt}>{item.totalPrice}</WhiteText>
+                                <WhiteText style={styles.productTxt}>{item.totalPrice}₪</WhiteText>
                             </View >
                         </ImageBackground>
                     </TouchableOpacity>
