@@ -43,7 +43,7 @@ export default function Category(p) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#2f4f4f',
+        backgroundColor: Colours.background,
         justifyContent: 'center',
         alignItems: 'center',
     },
