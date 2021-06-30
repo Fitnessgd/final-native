@@ -1,5 +1,5 @@
 import React from "react";
-import { View, FlatList, TouchableOpacity, StyleSheet, Platform } from "react-native";
+import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
 import WhiteText from "../components/WhiteText";
 import Colours from "../constants/Colours";
 import categories from "../data/categories";
@@ -13,7 +13,7 @@ export default function Landing(p) {
                 renderItem={({ item }) =>
                     <TouchableOpacity style={styles.category}
                         onPress={() =>
-                            p.navigation.navigate(
+                            p.navigation.push(
                                 'category',
                                 { name: item.name }
                             )
@@ -23,13 +23,6 @@ export default function Landing(p) {
                 keyExtractor={item => item.key} />
         </View>
     )
-}
-Landing.navigationOptions = {
-    headerTitle: "Home",
-    headerStyle: {
-        backgroundColor: Platform.OS === 'android' ? Colours.background : '',
-    },
-    headerTintColor: Platform.OS === 'android' ? "white" : ''
 }
 const styles = StyleSheet.create({
     container: {

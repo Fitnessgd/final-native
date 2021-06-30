@@ -1,9 +1,10 @@
 import React from "react";
-import { Image, StyleSheet, Platform, ScrollView, View, FlatList } from "react-native";
+import { Button, Image, Platform, ScrollView, StyleSheet, View } from "react-native";
 import WhiteText from "../components/WhiteText";
 import Colours from "../constants/Colours";
+import cart from "../data/cart";
 export default function ProductPage(p) {
-    const product = p.navigation.getParam("product");
+    const product = p.route.params;
     ProductPage.navigationOptions = {
         headerTitle: product.title,
         headerStyle: {
@@ -11,35 +12,40 @@ export default function ProductPage(p) {
         },
         headerTintColor: Platform.OS === 'android' ? "white" : ''
     }
+
+    const content =
+        <View style={styles.container}>
+            <Image source={{ uri: product.photo }} style={styles.img} />
+            <WhiteText style={styles.title}>{product.title}</WhiteText>
+            <WhiteText style={styles.productTxt}>{product.description}</WhiteText>
+            <View style={styles.reviews}>
+                {product.reviews.map(
+                    (item, key) =>
+                        <View key={key}>
+                            <WhiteText style={styles.reviewTitle}>{item.name}</WhiteText>
+                            <WhiteText style={styles.reviewTxt}>{item.content}</WhiteText>
+                        </View>
+                )}
+            </View>
+            <View style={styles.details}>
+                <WhiteText style={styles.detailsTitle}>Details</WhiteText>
+                <WhiteText style={styles.detailsTxt}>Price: {product.totalPrice + product.shipping}</WhiteText>
+                <WhiteText style={styles.detailsTitle}>Software Requirements</WhiteText>
+                <WhiteText style={styles.detailsTxt}>Storage: {product.storage}</WhiteText>
+                <WhiteText style={styles.detailsTxt}>Memory: {product.memory}</WhiteText>
+                <WhiteText style={styles.detailsTxt}>Storage: {product.storage}</WhiteText>
+            </View>
+            <View style={{ marginTop: 10 }}>
+                <Button title="Add to cart" color={Colours.button} onPress={() => cart.push(product)} />
+            </View>
+        </View >
+    const fixScroll = <View style={{ height: content.props.children.length * 100, backgroundColor: Colours.background }} />
+
     return (
-        <FlatList
-            contentContainerStyle={styles.container}
-            data={[1]}
-            renderItem={({ item }) =>
-                <View>
-                    <Image source={{ uri: product.photo }} style={styles.img} />
-                    <WhiteText style={styles.title}>{product.title}</WhiteText>
-                    <WhiteText style={styles.productTxt}>{product.description}</WhiteText>
-                    <View style={styles.reviews}>
-                        {product.reviews.map(
-                            item =>
-                                <View>
-                                    <WhiteText style={styles.reviewTitle}>{item.name}</WhiteText>
-                                    <WhiteText style={styles.reviewTxt}>{item.content}</WhiteText>
-                                </View>
-                        )}
-                    </View>
-                    <View style={styles.details}>
-                        <WhiteText style={styles.detailsTitle}>Details</WhiteText>
-                        <WhiteText style={styles.detailsTxt}>Price: {product.totalPrice + product.shipping}</WhiteText>
-                        <WhiteText style={styles.detailsTitle}>Software Requirements</WhiteText>
-                        <WhiteText style={styles.detailsTxt}>Storage: {product.storage}</WhiteText>
-                        <WhiteText style={styles.detailsTxt}>Memory: {product.memory}</WhiteText>
-                        <WhiteText style={styles.detailsTxt}>Storage: {product.storage}</WhiteText>
-                    </View>
-                </View>
-            }
-        />
+        <ScrollView >
+            {content}
+            {fixScroll}
+        </ScrollView>
     );
 }
 const styles = StyleSheet.create({
@@ -64,13 +70,13 @@ const styles = StyleSheet.create({
         justifyContent: "space-between"
     },
     img: {
-        width: "100%", height: "10%"
+        width: "100%", height: "15%"
     },
     title: {
         margin: 10,
         fontSize: 26,
         flexDirection: "row",
-        justifyContent: "space-between"
+        alignSelf: "center"
     },
     details: {
         width: "90%",
