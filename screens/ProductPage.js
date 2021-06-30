@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Image, Platform, ScrollView, StyleSheet, View } from "react-native";
 import WhiteText from "../components/WhiteText";
 import Colours from "../constants/Colours";
-import cart from "../data/cart";
+import { addToCart } from "../data/cart";
 export default function ProductPage(p) {
     const product = p.route.params;
     ProductPage.navigationOptions = {
@@ -36,7 +36,7 @@ export default function ProductPage(p) {
                 <WhiteText style={styles.detailsTxt}>Storage: {product.storage}</WhiteText>
             </View>
             <View style={{ marginTop: 10 }}>
-                <Button title="Add to cart" color={Colours.button} onPress={() => cart.push(product)} />
+                <Button title="Add to cart" color={Colours.button} onPress={() => addToCart(product)} />
             </View>
         </View >
     const fixScroll = <View style={{ height: content.props.children.length * 100, backgroundColor: Colours.background }} />
