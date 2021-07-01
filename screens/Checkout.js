@@ -27,7 +27,7 @@ export default p => {
                 <View style={{ marginTop: 20, marginBottom: 5, alignItems: "center" }}>
                     <Button title="Payment" color={Colours.confirm}
                         onPress={() => {
-                            if (state.posts.length > 0)
+                            //if (state.posts.length > 0)
                                 p.navigation.push("Payment");
                         }
                         } />

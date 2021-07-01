@@ -1,5 +1,6 @@
+import { Ionicons } from "@expo/vector-icons";
 import React, { useContext } from "react";
-import { Button, Image, ScrollView, StyleSheet, View } from "react-native";
+import { Button, Image, ScrollView, StyleSheet, TouchableHighlight, View } from "react-native";
 import { Context } from "../components/Store";
 import WhiteText from "../components/WhiteText";
 import Colours from "../constants/Colours";
@@ -32,7 +33,11 @@ export default function ProductPage(p) {
                 <WhiteText style={styles.detailsTxt}>Storage: {product.storage}</WhiteText>
             </View>
             <View style={{ marginTop: 10 }}>
-                <Button title="Add to cart" color={Colours.button} onPress={() => addToCart(product)} />
+                <TouchableHighlight
+                    style={styles.cartButton}
+                    onPress={() => addToCart(product)}>
+                    <Ionicons name="cart" size={30} color={Colours.white} />
+                </TouchableHighlight>
             </View>
         </View >
     const fixScroll = <View style={{ height: content.props.children.length * 100, backgroundColor: Colours.background }} />
@@ -116,5 +121,15 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         fontStyle: "italic"
+    },
+    cartButton: {
+        backgroundColor: Colours.red,
+        borderRadius: 30,
+        width: 100,
+        height: 40,
+        justifyContent: "center",
+        alignItems: "center",
+        borderWidth: 2,
+        borderColor: Colours.white
     }
 });

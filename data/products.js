@@ -88,7 +88,7 @@ There are hundreds of weapons, hats and more to collect, craft, buy and trade. T
         ]
     ),
     new Product(
-        "https://cdn.ndtv.com/tech/gadgets/cs_go_header_valve.jpg",
+        "https://gamezo.co.uk/wp-content/uploads/2021/01/CSGOPoster.png",
         "Counter Strike: Global Offensive",
         `Counter-Strike: Global Offensive (CS: GO) expands upon the team-based action gameplay that it pioneered when it was launched 19 years ago.
 
@@ -100,8 +100,8 @@ CS: GO features new maps, characters, weapons, and game modes, and delivers upda
         0,
         0,
         [
-          
-           
+
+
         ],
         [
             Categories.action,

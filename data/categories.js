@@ -1,5 +1,4 @@
 import Categories from "../constants/Categories";
-
 export default [
     { name: Categories.firstPerson, key: 1 },
     { name: Categories.puzzle, key: 2 },
