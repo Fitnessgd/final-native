@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         width: "45%",
         height: 100,
-        borderColor: "white",
+        borderColor: Colours.white,
         borderWidth: 3,
         borderRadius: 30,
         marginTop: 10,

@@ -1,18 +1,14 @@
-import React from "react";
-import { Button, Image, Platform, ScrollView, StyleSheet, View } from "react-native";
+import React, { useContext } from "react";
+import { Button, Image, ScrollView, StyleSheet, View } from "react-native";
+import { Context } from "../components/Store";
 import WhiteText from "../components/WhiteText";
 import Colours from "../constants/Colours";
-import { addToCart } from "../data/cart";
 export default function ProductPage(p) {
     const product = p.route.params;
-    ProductPage.navigationOptions = {
-        headerTitle: product.title,
-        headerStyle: {
-            backgroundColor: Platform.OS === 'android' ? Colours.background : '',
-        },
-        headerTintColor: Platform.OS === 'android' ? "white" : ''
+    const [state, dispatch] = useContext(Context);
+    const addToCart = p => {
+        dispatch({ type: 'ADD_POST', payload: p })
     }
-
     const content =
         <View style={styles.container}>
             <Image source={{ uri: product.photo }} style={styles.img} />
@@ -57,7 +53,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         width: "45%",
         height: 100,
-        borderColor: "white",
+        borderColor: Colours.white,
         borderWidth: 3,
         borderRadius: 30,
         marginTop: 10,

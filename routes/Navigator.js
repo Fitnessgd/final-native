@@ -2,11 +2,15 @@ import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
+import { Platform } from "react-native";
 import Colours from "../constants/Colours";
 import Cart from "../screens/Cart";
 import Category from "../screens/Category";
+import Checkout from "../screens/Checkout";
 import Landing from "../screens/Landing";
+import Payment from "../screens/Payment";
 import ProductPage from "../screens/ProductPage";
+import Receipt from "../screens/Receipt";
 const Stack = createStackNavigator();
 function StackComponent() {
     return (
@@ -49,7 +53,6 @@ function StackComponent() {
         </Stack.Navigator>
     )
 }
-const Tab = createBottomTabNavigator();
 const CartStack = createStackNavigator();
 function CartComponent() {
     return (
@@ -70,6 +73,53 @@ function CartComponent() {
         </CartStack.Navigator>
     )
 }
+const CheckoutStack = createStackNavigator();
+function CheckoutComponent() {
+    return (
+        <CheckoutStack.Navigator>
+            <CheckoutStack.Screen
+                name="Checkout"
+                component={Checkout}
+                options={
+                    {
+                        headerTitle: "Checkout",
+                        headerStyle: {
+                            backgroundColor: Platform.OS === 'android' ? Colours.background : '',
+                        },
+                        headerTintColor: Platform.OS === 'android' ? "white" : ''
+                    }
+                }
+            />
+            <CheckoutStack.Screen
+                name="Payment"
+                component={Payment}
+                options={
+                    {
+                        headerTitle: "Checkout",
+                        headerStyle: {
+                            backgroundColor: Platform.OS === 'android' ? Colours.background : '',
+                        },
+                        headerTintColor: Platform.OS === 'android' ? "white" : ''
+                    }
+                }
+            />
+            <CheckoutStack.Screen
+                name="Receipt"
+                component={Receipt}
+                options={
+                    {
+                        headerTitle: "Receipt",
+                        headerStyle: {
+                            backgroundColor: Platform.OS === 'android' ? Colours.background : '',
+                        },
+                        headerTintColor: Platform.OS === 'android' ? "white" : ''
+                    }
+                }
+            />
+        </CheckoutStack.Navigator>
+    )
+}
+const Tab = createBottomTabNavigator();
 export default function TabsComponent() {
     return (
         <Tab.Navigator tabBarOptions={
@@ -77,7 +127,7 @@ export default function TabsComponent() {
                 inactiveBackgroundColor: Colours.tabInactive,
                 activeBackgroundColor: Colours.tabActive,
                 inactiveTintColor: "white",
-                activeTintColor: "white"
+                activeTintColor: "white",
             }
         }
         >
@@ -88,7 +138,7 @@ export default function TabsComponent() {
                     {
                         tabBarIcon: () =>
                             <Ionicons
-                                name="home"
+                                name="home-outline"
                                 size={25}
                                 color={"white"}
                             />,
@@ -102,10 +152,24 @@ export default function TabsComponent() {
                     {
                         tabBarIcon: () =>
                             <Ionicons
-                                name="cart"
+                                name="cart-outline"
                                 size={25}
                                 color={"white"}
-                            />
+                            />,
+                    }
+                }
+            />
+            <Tab.Screen
+                name="Checkout"
+                component={CheckoutComponent}
+                options={
+                    {
+                        tabBarIcon: () =>
+                            <Ionicons
+                                name="checkmark-circle-outline"
+                                size={25}
+                                color={"white"}
+                            />,
                     }
                 }
             />
