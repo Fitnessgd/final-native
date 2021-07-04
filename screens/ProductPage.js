@@ -26,7 +26,7 @@ export default function ProductPage(p) {
             </View>
             <View style={styles.details}>
                 <WhiteText style={styles.detailsTitle}>Details</WhiteText>
-                <WhiteText style={styles.detailsTxt}>Price: {product.totalPrice + product.shipping}</WhiteText>
+                <WhiteText style={styles.detailsTxt}>Price: {product.totalPrice + product.shipping}₪</WhiteText>
                 <WhiteText style={styles.detailsTitle}>Software Requirements</WhiteText>
                 <WhiteText style={styles.detailsTxt}>Storage: {product.storage}</WhiteText>
                 <WhiteText style={styles.detailsTxt}>Memory: {product.memory}</WhiteText>

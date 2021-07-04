@@ -11,7 +11,7 @@ export default function Cart(p) {
         <View style={styles.container}>
             <View style={styles.counterBar}>
                 <WhiteText>Number of items: {state.posts.length}</WhiteText>
-                <WhiteText>Total price: {totalPrice.toFixed(2)}</WhiteText>
+                <WhiteText>Total price: {totalPrice.toFixed(2)}₪</WhiteText>
                 <TouchableOpacity onPress={() => dispatch({ type: "SET_POSTS", payload: [] })}><Text style={{ color: Colours.red }}>Reset</Text></TouchableOpacity>
             </View>
             <FlatList
@@ -21,7 +21,7 @@ export default function Cart(p) {
                     ({ item }) =>
                         <View style={styles.product}>
                             <WhiteText style={styles.productTxt}>{item.title}</WhiteText>
-                            <WhiteText style={styles.productTxt}>{(item.totalPrice + item.shipping).toFixed(2)}</WhiteText>
+                            <WhiteText style={styles.productTxt}>{(item.totalPrice + item.shipping).toFixed(2)}₪</WhiteText>
                             <TouchableOpacity
                                 style={{ backgroundColor: Colours.darkRed, borderWidth: 2, borderRadius: 90, height: "70%", alignSelf: "center", justifyContent: "center" }}
                                 onPress={() => dispatch({ type: "REMOVE_POST", payload: item })}>

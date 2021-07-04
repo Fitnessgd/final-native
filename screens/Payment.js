@@ -5,10 +5,6 @@ import WhiteText from "../components/WhiteText";
 import Colours from "../constants/Colours";
 export default p => {
     const [state, dispatch] = useContext(Context);
-    const confirm = () => {
-        dispatch({ type: "SET_POSTS", payload: [] });
-        p.navigation.replace("Receipt");
-    }
     const [details, setDetails] = useState({
         firstName: "",
         surname: "",
@@ -24,6 +20,13 @@ export default p => {
         expiryDate: "",
         cvv: ""
     })
+    const confirm = () => {
+        if ((`${details.emailUser}@${details.emailDomain}`).match(/\A[a-z0-9!#$%&'*+/=?^_‘{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_‘{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\z/)
+            != null) {
+            dispatch({ type: "SET_POSTS", payload: [] });
+            p.navigation.replace("Receipt");
+        }
+    }
     return (
         <View style={styles.container}>
             <View style={styles.row}>
@@ -33,7 +36,7 @@ export default p => {
                         <TextInput
                             style={styles.field}
                             value={details.firstName}
-                            onChangeText={v => setDetails({ ...details, firstName: v })}
+                            onChangeText={v => setDetails({ ...details, firstName: v.replace(/[^A-Za-z ]/g, "") })}
                         />
                     </View>
                 </View>
@@ -43,14 +46,43 @@ export default p => {
                         <TextInput
                             style={styles.field}
                             value={details.surname}
-                            onChangeText={v => setDetails({ ...details, surname: v })}
+                            onChangeText={v => setDetails({ ...details, surname: v.replaceAll(/[^A-Za-z ]/g, "") })}
                         />
                     </View>
                 </View>
             </View>
             <View style={styles.row}>
+
                 <View style={styles.fieldGroup}>
-                    <WhiteText>Email</WhiteText>
+                    <WhiteText>Tel</WhiteText>
+                    <View style={{ ...styles.row, width: "100%" }}>
+                        <WhiteText style={{ alignSelf: "center", marginRight: "1%" }}>+</WhiteText>
+                        <View style={{ ...styles.fieldBorder, width: "24%" }}>
+                            <TextInput
+                                maxLength={3}
+                                style={styles.field}
+                                keyboardType="phone-pad"
+                                value={details.telPrefix}
+                                onChangeText={v => setDetails({ ...details, telPrefix: v })}
+                            />
+                        </View>
+                        <View style={{ ...styles.fieldBorder, width: "73%" }}>
+                            <TextInput
+                                maxLength={9}
+                                style={styles.field}
+                                keyboardType="phone-pad"
+                                value={details.tel}
+                                onChangeText={v => setDetails({ ...details, tel: v })}
+                            />
+                        </View>
+                    </View>
+                </View>
+            </View>
+            <View style={styles.row}>
+                <WhiteText>Email</WhiteText>
+            </View>
+            <View style={styles.row}>
+                <View style={styles.fieldGroup}>
                     <View style={styles.fieldBorder}>
                         <TextInput
                             style={styles.field}
@@ -60,14 +92,14 @@ export default p => {
                         />
                     </View>
                 </View>
+                <WhiteText style={{ alignSelf: "center", marginRight: 10 }}>@</WhiteText>
                 <View style={styles.fieldGroup}>
-                    <WhiteText>Tel</WhiteText>
                     <View style={styles.fieldBorder}>
                         <TextInput
                             style={styles.field}
-                            keyboardType="phone-pad"
-                            value={details.tel}
-                            onChangeText={v => setDetails({ ...details, tel: v })}
+                            value={details.emailDomain}
+                            onChangeText={v => setDetails({ ...details, emailDomain: v })}
+                            keyboardType="email-address"
                         />
                     </View>
                 </View>
@@ -79,17 +111,17 @@ export default p => {
                         <TextInput
                             style={styles.field}
                             value={details.country}
-                            onChangeText={v => setDetails({ ...details, country: v })}
+                            onChangeText={v => setDetails({ ...details, country: v.replace(/[^A-Za-z ]/g, "") })}
                         />
                     </View>
                 </View>
                 <View style={styles.fieldGroup}>
-                    <WhiteText>City</WhiteText>
+                    <WhiteText>City/Locality</WhiteText>
                     <View style={styles.fieldBorder}>
                         <TextInput
                             style={styles.field}
                             value={details.city}
-                            onChangeText={v => setDetails({ ...details, city: v })}
+                            onChangeText={v => setDetails({ ...details, city: v.replace(/[^A-Za-z ]/g, "") })}
                         />
                     </View>
                 </View>
@@ -101,20 +133,19 @@ export default p => {
                         <TextInput
                             style={styles.field}
                             value={details.address}
-                            onChangeText={v => setDetails({ ...details, address: v })}
+                            onChangeText={v => setDetails({ ...details, address: v.replace(/[^A-Za-z\/\\\, 0-9]/g, "") })}
                         />
                     </View>
                 </View>
             </View>
             <View style={styles.row}>
-
                 <View style={styles.fieldGroup}>
                     <WhiteText>Card Holder</WhiteText>
                     <View style={styles.fieldBorder}>
                         <TextInput
                             style={styles.field}
                             value={details.cardHolder}
-                            onChangeText={v => setDetails({ ...details, cardHolder: v })}
+                            onChangeText={v => setDetails({ ...details, cardHolder: v.replace(/[^A-Za-z ]/g, "") })}
                         />
                     </View>
                 </View>
@@ -124,9 +155,11 @@ export default p => {
                     <WhiteText>ID</WhiteText>
                     <View style={styles.fieldBorder}>
                         <TextInput
+                            maxLength={9}
+                            keyboardType="numeric"
                             style={styles.field}
                             value={details.id}
-                            onChangeText={v => setDetails({ ...details, id: v })}
+                            onChangeText={v => setDetails({ ...details, id: v.replace(/[^0-9]/g, "") })}
                         />
                     </View>
                 </View>
@@ -134,9 +167,11 @@ export default p => {
                     <WhiteText>Credit Card Number</WhiteText>
                     <View style={styles.fieldBorder}>
                         <TextInput
+                            maxLength={16}
+                            keyboardType="numeric"
                             style={styles.field}
                             value={details.credCardNum}
-                            onChangeText={v => setDetails({ ...details, credCardNum: v })}
+                            onChangeText={v => setDetails({ ...details, credCardNum: v.replace(/[^0-9]/g, "") })}
                         />
                     </View>
                 </View>
@@ -144,21 +179,41 @@ export default p => {
             <View style={styles.row}>
                 <View style={styles.fieldGroup}>
                     <WhiteText>Expiry Date</WhiteText>
-                    <View style={styles.fieldBorder}>
-                        <TextInput
-                            style={styles.field}
-                            value={details.expiryDate}
-                            onChangeText={v => setDetails({ ...details, expiryDate: v })}
-                        />
+                    <View style={{ ...styles.row, width: "40%" }}>
+                        <View style={styles.fieldBorder}>
+                            <TextInput
+                                placeholder={"MM"}
+                                placeholderTextColor={Colours.red}
+                                keyboardType="numeric"
+                                maxLength={2}
+                                style={styles.field}
+                                value={details.expiryMonth}
+                                onChangeText={v => setDetails({ ...details, expiryMonth: v.replace(/[^0-9]/g, "") })}
+                            />
+                        </View>
+                        <WhiteText style={{ alignSelf: "center", marginLeft: 10, marginRight: 10 }}>/</WhiteText>
+                        <View style={styles.fieldBorder}>
+                            <TextInput
+                                placeholderTextColor={Colours.red}
+                                placeholder={"YY"}
+                                keyboardType="numeric"
+                                maxLength={2}
+                                style={styles.field}
+                                value={details.expiryYear}
+                                onChangeText={v => setDetails({ ...details, expiryYear: v.replace(/[^0-9]/g, "") })}
+                            />
+                        </View>
                     </View>
                 </View>
                 <View style={styles.fieldGroup}>
                     <WhiteText>CVV</WhiteText>
                     <View style={styles.fieldBorder}>
                         <TextInput
+                            maxLength={3}
+                            keyboardType="numeric"
                             style={styles.field}
                             value={details.cvv}
-                            onChangeText={v => setDetails({ ...details, cvv: v })}
+                            onChangeText={v => setDetails({ ...details, cvv: v.replace(/[^0-9]/g, "") })}
                         />
                     </View>
                 </View>
@@ -183,7 +238,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "flex-start",
-        width: "100%",
+        width: "100%"
     },
     fieldGroup: {
         flex: 1,
