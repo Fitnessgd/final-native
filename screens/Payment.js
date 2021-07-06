@@ -1,13 +1,12 @@
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { useHeaderHeight } from "@react-navigation/stack";
 import React, { useContext, useState } from "react";
-import { LogBox, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
+import { StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Context } from "../components/Store";
 import WhiteText from "../components/WhiteText";
 import Colours from "../constants/Colours";
 export default p => {
-    LogBox.ignoreAllLogs(true)
     const [state, dispatch] = useContext(Context);
     const [details, setDetails] = useState({
         firstName: "",
@@ -177,7 +176,7 @@ export default p => {
                 </View>
                 <View style={styles.row}>
                     <View style={styles.fieldGroup}>
-                        <WhiteText>Card Holder</WhiteText>
+                        <WhiteText>Card Holder - First name and Surname</WhiteText>
                         <View style={styles.fieldBorder}>
                             <TextInput
                                 style={styles.field}
@@ -255,14 +254,15 @@ export default p => {
                         </View>
                     </View>
                 </View>
+                <Text style={{ color: Colours.red, alignSelf: "center" }}>{warning}</Text>
                 <View style={styles.buttonContainer}>
                     <TouchableHighlight
                         onPress={confirm}
-                        style={styles.button}>
-                        <WhiteText style={{ fontSize: 16 }}>Confirm</WhiteText>
+                        style={styles.button}
+                    >
+                        <Text style={{ fontSize: 16, color: Colours.white }}>Confirm</Text>
                     </TouchableHighlight>
                 </View>
-                <Text style={{ color: Colours.red, alignSelf: "center" }}>{warning}</Text>
             </View>
         </KeyboardAwareScrollView>
     )
