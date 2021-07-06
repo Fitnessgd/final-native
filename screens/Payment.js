@@ -1,12 +1,13 @@
+import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
+import { useHeaderHeight } from "@react-navigation/stack";
 import React, { useContext, useState } from "react";
-import { KeyboardAvoidingView, StyleSheet, TextInput, TouchableHighlight, View, Platform, Text } from "react-native";
+import { LogBox, StyleSheet, Text, TextInput, TouchableHighlight, View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Context } from "../components/Store";
 import WhiteText from "../components/WhiteText";
 import Colours from "../constants/Colours";
-import { useHeaderHeight } from "@react-navigation/stack";
-import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 export default p => {
+    LogBox.ignoreAllLogs(true)
     const [state, dispatch] = useContext(Context);
     const [details, setDetails] = useState({
         firstName: "",
