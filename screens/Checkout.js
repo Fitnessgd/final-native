@@ -59,8 +59,8 @@ export default p => {
                     </View>
                     <Button title="Payment" color={Colours.confirm}
                         onPress={() => {
-                            //if (state.posts.length > 0)
-                            p.navigation.push("Payment");
+                            if (state.posts.length > 0)
+                                p.navigation.push("Payment");
                         }
                         } />
                 </View>

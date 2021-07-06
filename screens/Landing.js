@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
+import { FlatList, StyleSheet, TouchableOpacity, View, ImageBackground } from "react-native";
 import WhiteText from "../components/WhiteText";
 import Colours from "../constants/Colours";
 import categories from "../data/categories";
@@ -18,8 +18,15 @@ export default function Landing(p) {
                                 { name: item.name }
                             )
                         }>
-                        <WhiteText style={styles.categoryTxt}>{item.name}</WhiteText>
-                    </TouchableOpacity>}
+                        <ImageBackground
+                            style={{ width: "100%", height: "100%" }}
+                            source={item.image}
+                            imageStyle={{ borderRadius: 30 }}
+                        >
+                            <WhiteText style={styles.categoryTxt}>{item.name}</WhiteText>
+                        </ImageBackground>
+                    </TouchableOpacity>
+                }
                 keyExtractor={item => item.key} />
         </View>
     )

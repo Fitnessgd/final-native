@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { KeyboardAvoidingView, StyleSheet, TextInput, TouchableHighlight, View, Platform } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, TextInput, TouchableHighlight, View, Platform, Text } from "react-native";
 import { Context } from "../components/Store";
 import WhiteText from "../components/WhiteText";
 import Colours from "../constants/Colours";
@@ -25,8 +25,9 @@ export default p => {
         expiryYear: "",
         cvv: ""
     })
+    const [warning, setWarning] = useState("");
     const emailRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/i;
-    const nameRegex = /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/;
+    const nameRegex = /(^[A-Za-z]{3,16})([ ]{0,1})([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})?([ ]{0,1})?([A-Za-z]{3,16})/g;
     const confirm = () => {
         console.log((`${details.emailUser}@${details.emailDomain}`)
             .match(emailRegex));
@@ -52,6 +53,9 @@ export default p => {
         ) {
             dispatch({ type: "SET_POSTS", payload: [] });
             p.navigation.replace("Receipt");
+        }
+        else {
+            setWarning("Please check the validity of your details.")
         }
     }
     const headerHeight = useHeaderHeight();
@@ -93,7 +97,7 @@ export default p => {
                                     style={styles.field}
                                     keyboardType="phone-pad"
                                     value={details.telPrefix}
-                                    onChangeText={v => setDetails({ ...details, telPrefix: v })}
+                                    onChangeText={v => setDetails({ ...details, telPrefix: v.replace(/[^0-9]/g, "") })}
                                 />
                             </View>
                             <View style={{ ...styles.fieldBorder, width: "73%" }}>
@@ -102,7 +106,7 @@ export default p => {
                                     style={styles.field}
                                     keyboardType="phone-pad"
                                     value={details.tel}
-                                    onChangeText={v => setDetails({ ...details, tel: v })}
+                                    onChangeText={v => setDetails({ ...details, tel: v.replace(/[^0-9]/g, "") })}
                                 />
                             </View>
                         </View>
@@ -177,7 +181,7 @@ export default p => {
                             <TextInput
                                 style={styles.field}
                                 value={details.cardHolder}
-                                onChangeText={v => setDetails({ ...details, cardHolder: v.replace(/[^A-Za-z ]/g, "") })}
+                                onChangeText={v => setDetails({ ...details, cardHolder: v.replace(/^[^A-Za-z]/g, "") })}
                             />
                         </View>
                     </View>
@@ -257,6 +261,7 @@ export default p => {
                         <WhiteText style={{ fontSize: 16 }}>Confirm</WhiteText>
                     </TouchableHighlight>
                 </View>
+                <Text style={{ color: Colours.red, alignSelf: "center" }}>{warning}</Text>
             </View>
         </KeyboardAwareScrollView>
     )

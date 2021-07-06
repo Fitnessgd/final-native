@@ -30,7 +30,7 @@ Editing Tools: Portal 2 editing tools will be included.`,
             ),
             new Review(
                 "Top 10 Games of the Decade, The Guardian UK",
-                "Sinister, sardonic and stunningly realised� Valve's idiosyncratic extra [is] a work of genius."
+                "Sinister, sardonic and stunningly realised Valve's idiosyncratic extra [is] a work of genius."
             ),
             new Review(
                 "Best Games of the Decade, The Onion AV Club",
