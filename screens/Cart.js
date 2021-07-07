@@ -23,9 +23,9 @@ export default function Cart(p) {
                             <WhiteText style={styles.productTxt}>{item.title}</WhiteText>
                             <WhiteText style={styles.productTxt}>{(item.totalPrice + item.shipping).toFixed(2)}₪</WhiteText>
                             <TouchableOpacity
-                                style={{ backgroundColor: Colours.darkRed, borderWidth: 2, borderRadius: 90, height: "70%", alignSelf: "center", justifyContent: "center" }}
+                                style={{ backgroundColor: Colours.darkRed, borderWidth: 2, borderRadius: 90, height: "70%", alignSelf: "center", justifyContent: "center", alignItems:"center", borderColor:Colours.white }}
                                 onPress={() => dispatch({ type: "REMOVE_POST", payload: item })}>
-                                <WhiteText style={{ margin: 10 }}>Remove</WhiteText>
+                                <WhiteText style={{ margin: 10, fontSize:12 }}>Remove</WhiteText>
                             </TouchableOpacity>
                         </View>
                 }
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     },
     productTxt: {
         margin: 10,
-        fontSize: 18,
+        fontSize: 12,
     },
     counterBar: {
         flexDirection: "row",
