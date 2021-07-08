@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     coupon: {
         borderWidth: 3,
         borderColor: Colours.white,
-        width: "50%",
+        width: "60%",
         justifyContent: "center",
         marginBottom: 10
     }
